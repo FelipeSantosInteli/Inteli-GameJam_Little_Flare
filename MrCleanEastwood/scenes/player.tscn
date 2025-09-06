@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://b42hi0kki2b44"]
+[gd_scene load_steps=23 format=3 uid="uid://b42hi0kki2b44"]
 
 [ext_resource type="Script" uid="uid://df4i1usrnukx3" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c4jgm4fcd2ekd" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_idle.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://blyg276uyhvsi" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_jump.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://dsavfaf4nrl8a" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_run.png" id="3_dqkch"]
+[ext_resource type="PackedScene" uid="uid://fx4dktoc4v37" path="res://scenes/gun.tscn" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_dqkch")
@@ -146,3 +147,6 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Col_crouch" type="CollisionShape2D" parent="."]
 position = Vector2(-23.5, 28)
 shape = SubResource("RectangleShape2D_g2els")
+
+[node name="Gun" parent="." instance=ExtResource("5_qlg0r")]
+position = Vector2(-3, 12)

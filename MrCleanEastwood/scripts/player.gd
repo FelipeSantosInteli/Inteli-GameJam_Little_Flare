@@ -64,7 +64,12 @@ func _physics_process(delta: float) -> void:
 		crouch(direction)
 	elif Input.is_action_just_pressed("ui_down") && !is_on_floor():
 		ground_pound()
-		
-	print(velocity.x)
 
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("mouse_left"):
+		var gun_node = get_node("Gun")
+		gun_node.shoot()
+		
+		
+		

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://fx4dktoc4v37"]
+
+[ext_resource type="Texture2D" uid="uid://bmv7voomcqbkv" path="res://assets/custom/gun.png" id="1_gp1hk"]
+[ext_resource type="Script" uid="uid://1emu60v5peo7" path="res://scripts/gun.gd" id="1_x77fm"]
+[ext_resource type="AudioStream" uid="uid://bexedtq0inbfu" path="res://assets/custom/gun_shot.mp3" id="2_og67c"]
+
+[node name="Gun" type="Sprite2D"]
+texture = ExtResource("1_gp1hk")
+script = ExtResource("1_x77fm")
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_og67c")
+volume_db = -20.0
