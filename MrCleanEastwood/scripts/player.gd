@@ -65,6 +65,6 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_down") && !is_on_floor():
 		ground_pound()
 		
-	print(velocity.x)
+	#print(velocity.x)
 
 	move_and_slide()

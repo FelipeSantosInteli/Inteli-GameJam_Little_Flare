@@ -139,7 +139,6 @@ autoplay = "walk"
 frame_progress = 0.248881
 
 [node name="Col_default" type="CollisionShape2D" parent="."]
-top_level = true
 position = Vector2(-23.5, 19)
 shape = SubResource("RectangleShape2D_dqkch")
 
