@@ -1,9 +1,26 @@
-[gd_scene load_steps=22 format=3 uid="uid://b42hi0kki2b44"]
+[gd_scene load_steps=27 format=3 uid="uid://b42hi0kki2b44"]
 
 [ext_resource type="Script" uid="uid://df4i1usrnukx3" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c4jgm4fcd2ekd" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_idle.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://blyg276uyhvsi" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_jump.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://806rfga48bqy" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_hurt.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dsavfaf4nrl8a" path="res://assets/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_run.png" id="3_dqkch"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_dqkch")
@@ -63,6 +80,23 @@ region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oprun"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60mlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ail")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38lo")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oprun")
@@ -134,9 +168,10 @@ script = ExtResource("1_g2els")
 texture_filter = 1
 scale = Vector2(2.14583, 2.14583)
 sprite_frames = SubResource("SpriteFrames_oprun")
-animation = &"walk"
+animation = &"hurt"
 autoplay = "walk"
-frame_progress = 0.248881
+frame = 1
+frame_progress = 1.0
 
 [node name="Col_default" type="CollisionShape2D" parent="."]
 position = Vector2(-23.5, 19)
@@ -145,3 +180,5 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Col_crouch" type="CollisionShape2D" parent="."]
 position = Vector2(-23.5, 28)
 shape = SubResource("RectangleShape2D_g2els")
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]

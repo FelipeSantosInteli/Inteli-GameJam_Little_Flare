@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgnxh0a0as7np"]
+
+[ext_resource type="Texture2D" uid="uid://clwo62evvuvgs" path="res://assets/Retro Inventory/Original/Hearts_Red_1.png" id="1_v30as"]
+[ext_resource type="Script" uid="uid://du7xqkr8k185h" path="res://scripts/heart.gd" id="2_ycbwg"]
+
+[node name="Heart" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_v30as")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_ycbwg")
