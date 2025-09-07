@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://pboaafweyi4a"]
+[gd_scene load_steps=9 format=3 uid="uid://pboaafweyi4a"]
 
 [ext_resource type="PackedScene" uid="uid://b42hi0kki2b44" path="res://scenes/player.tscn" id="1_a8v3n"]
 [ext_resource type="PackedScene" uid="uid://cak4yud372edf" path="res://scenes/enemy.tscn" id="2_fdpfy"]
 [ext_resource type="Script" uid="uid://dm2ydsvm7gltr" path="res://scripts/game_manager.gd" id="3_6p80c"]
 [ext_resource type="PackedScene" uid="uid://c6nv0m85vf1bv" path="res://scenes/UI.tscn" id="4_8ut53"]
+[ext_resource type="PackedScene" uid="uid://wrnoiw30itbh" path="res://scenes/enemy2.tscn" id="5_2ue4q"]
+[ext_resource type="PackedScene" uid="uid://cikfksbyr4008" path="res://scenes/Enemy3.tscn" id="6_4fwf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdpfy"]
 size = Vector2(1152, 65)
@@ -13,7 +15,8 @@ size = Vector2(1152, 65)
 [node name="PlayerTest" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_a8v3n")]
-position = Vector2(494, 341)
+unique_name_in_owner = true
+position = Vector2(150, 256)
 jump_hight = 200.0
 jump_peak_time = 0.4
 jump_fall_time = 0.5
@@ -28,11 +31,23 @@ shape = SubResource("RectangleShape2D_fdpfy")
 scale = Vector2(1150.25, 63.5)
 texture = SubResource("PlaceholderTexture2D_6p80c")
 
-[node name="Enemy" parent="." instance=ExtResource("2_fdpfy")]
-position = Vector2(911, 567)
-scale = Vector2(2, 2)
-
 [node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("3_6p80c")
 
 [node name="Ui" parent="." instance=ExtResource("4_8ut53")]
+unique_name_in_owner = true
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("2_fdpfy")]
+position = Vector2(344, 551)
+scale = Vector2(4, 4)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("5_2ue4q")]
+position = Vector2(571, 515)
+scale = Vector2(4.3, 4.3)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("6_4fwf8")]
+position = Vector2(1139, 552)
+scale = Vector2(3.8, 3.8)
