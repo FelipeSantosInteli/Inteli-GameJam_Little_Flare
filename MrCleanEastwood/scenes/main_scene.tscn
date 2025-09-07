@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfi4oh46xn7ns"]
 
-[ext_resource type="Texture2D" uid="uid://b5dj51psrdi70" path="res://assets/sky.png" id="1_gw0ce"]
-[ext_resource type="Script" uid="uid://b88vel5vk13sr" path="res://scripts/cloud_spawner.gd" id="3_spawner"]
-[ext_resource type="PackedScene" uid="uid://pboaafweyi4a" path="res://scenes/player_test.tscn" id="4_gw0ce"]
-[ext_resource type="PackedScene" uid="uid://07n5ty7efnir" path="res://scenes/pause_menu.tscn" id="5_x8lw6"]
+[ext_resource type="Texture2D" uid="uid://cwp272rw1pv7g" path="res://assets/sky.png" id="1_pu3yx"]
+[ext_resource type="PackedScene" uid="uid://pboaafweyi4a" path="res://scenes/player_test.tscn" id="2_gubc5"]
+[ext_resource type="Script" uid="uid://b88vel5vk13sr" path="res://scripts/cloud_spawner.gd" id="3_rt2n2"]
+[ext_resource type="PackedScene" uid="uid://bhax5cocobq3t" path="res://scenes/pause_menu.tscn" id="4_c16ls"]
 
 [node name="Main Scene" type="Node2D"]
 
@@ -14,10 +14,10 @@
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
 texture_filter = 1
 scale = Vector2(2.1573, 2.18)
-texture = ExtResource("1_gw0ce")
+texture = ExtResource("1_pu3yx")
 centered = false
 
-[node name="PlayerTest" parent="." instance=ExtResource("4_gw0ce")]
+[node name="PlayerTest" parent="." instance=ExtResource("2_gubc5")]
 position = Vector2(1, 70)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerTest"]
@@ -25,9 +25,9 @@ position = Vector2(-2, -66)
 offset = Vector2(576, 324)
 
 [node name="CloudSpawner" type="Node2D" parent="."]
-script = ExtResource("3_spawner")
+script = ExtResource("3_rt2n2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_x8lw6")]
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_c16ls")]
 visible = false
