@@ -6,6 +6,9 @@ extends Area2D
 
 var hit : bool
 
+func collision():
+	print("Collision func")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Delay.wait_time = DelayTime
@@ -31,3 +34,5 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_delay_timeout() -> void:
 	if DelayTime > 0.0:
 		print("Hit Timeout")
+		collision()
+		

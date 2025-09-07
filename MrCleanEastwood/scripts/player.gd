@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		
 	#Handle the jump action
-	if Input.is_action_just_pressed("ui_accept") && is_on_floor() && can_jump:
+	if Input.is_action_just_pressed("ui_accept") && is_on_floor() && can_jump && !is_hurt:
 		jump()
 
 	if Input.is_action_pressed("ui_down") && is_on_floor():
@@ -80,6 +80,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_sprite_2d_animation_finished() -> void:
-	if Sprite.animation == "hurt":
+	if Sprite.animation == "hurt" || Sprite.animation == "jump":
 		is_hurt = false
 		Sprite.play("walk")

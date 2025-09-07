@@ -14,7 +14,6 @@ func update(health_points: int):
 		health_points = player_hearts
 	if health_points >= 0:
 		if health_points < player_hearts:
-			print("teste")
 			var difference = int(player_hearts - health_points)
 			active_hrts[difference * -1].active = false
 			print(difference * -1)

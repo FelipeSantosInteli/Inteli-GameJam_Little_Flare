@@ -2,9 +2,7 @@ extends Node2D
 
 @onready var Sprite = $AnimatedSprite2D
 @onready var onRange = false
-@onready var GameManager = $"../GameManager"
-
-var PlayerNode : Node2D
+@onready var GameManager = %GameManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,9 +14,8 @@ func _process(delta: float) -> void:
 
 func _on_atk_zone_body_entered(body: Node2D) -> void:
 	if (body.name == "Player"):
-		PlayerNode = body
 		onRange = true
-		Sprite.play("melee")
+		Sprite.play("atk")
 		print(str(body, " entrou no alcance do inimigo"))
 	
 func _on_atk_zone_body_exited(body: Node2D) -> void:
@@ -26,17 +23,17 @@ func _on_atk_zone_body_exited(body: Node2D) -> void:
 		onRange = false
 
 func _on_animated_sprite_2d_animation_changed() -> void:
+	print(str(Sprite, " --> Enemy changed"))
 	if Sprite:
-		if Sprite.animation == "melee":
+		if Sprite.animation == "atk":
 			print("Ataque inimigo")
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if Sprite:
-		if Sprite.animation == "melee":
+		if Sprite.animation == "atk":
 			if onRange:
-				Sprite.play("melee")
+				Sprite.play("atk")
 				print("tomou")
-				PlayerNode.got_hit()
 				GameManager.player_hit()
 			else:
 				Sprite.play("idle")
