@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var move_speed = 200.0
 
+@export var knockback := 1.5
+
 @export var can_jump = true
 
 @export var jump_hight : float
@@ -15,9 +17,16 @@ extends CharacterBody2D
 @onready var Col_default = $Col_default.disabled
 @onready var Sprite = $Sprite2D
 
+var is_hurt = false
+
 #Return jump_gravity or fall_gravity depending on whether the player is going up or down
 func _get_gravity() -> float:
 	return jump_gravity if velocity.y < 0 else fall_gravity
+
+func got_hit():
+	is_hurt = true
+	Sprite.play("hurt")
+	velocity.x = knockback * -1000
 
 func jump():
 	velocity.y = jump_velocity
@@ -40,18 +49,18 @@ func _physics_process(delta: float) -> void:
 	Sprite.scale.y = 2.146
 	Sprite.position.y = 0.0
 	
-	if is_on_floor() && velocity.x == 0.0:
+	if is_on_floor() && velocity.x == 0.0 && !is_hurt:
 		Sprite.play("walk", 1.0)
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction > 0:
+	if direction > 0 && !is_hurt:
 		velocity.x = direction * 0.5 * move_speed
-		if is_on_floor():
+		if is_on_floor() && !is_hurt:
 			Sprite.play("walk",1.4)
 	elif direction < 0:
 		velocity.x = direction * move_speed
-		if is_on_floor():
+		if is_on_floor() && !is_hurt:
 			Sprite.play("walk",0.8)
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
@@ -65,6 +74,12 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_down") && !is_on_floor():
 		ground_pound()
 		
-	print(velocity.x)
-
+	#print(velocity.x)
+	
 	move_and_slide()
+
+
+func _on_sprite_2d_animation_finished() -> void:
+	if Sprite.animation == "hurt":
+		is_hurt = false
+		Sprite.play("walk")
