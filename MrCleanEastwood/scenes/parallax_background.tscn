@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cppb6kcqd2w7p"]
+
+[ext_resource type="Texture2D" uid="uid://c6u15nf6s85rv" path="res://assets/sky.png" id="1_m10ct"]
+[ext_resource type="Script" uid="uid://bsswlv4krep2b" path="res://scripts/floor.gd" id="1_r7lvs"]
+[ext_resource type="Texture2D" uid="uid://bm1lp077rcc6w" path="res://assets/retro_pixel_plains/style_C/PNG/bg2.png" id="3_bpahb"]
+[ext_resource type="Texture2D" uid="uid://cfhhd4y1ru8lu" path="res://assets/retro_pixel_plains/style_C/PNG/bg1.png" id="3_ljpgv"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_r7lvs")
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky"]
+texture_filter = 1
+scale = Vector2(2.1573, 2.18)
+texture = ExtResource("1_m10ct")
+centered = false
+
+[node name="Sky3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky3"]
+texture_filter = 1
+scale = Vector2(7.20625, 7.03261)
+texture = ExtResource("3_bpahb")
+centered = false
+
+[node name="Sky2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky2"]
+texture_filter = 1
+scale = Vector2(7.2, 7.04348)
+texture = ExtResource("3_ljpgv")
+centered = false
