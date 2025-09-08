@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkiyb7whqm77m"]
+
+[ext_resource type="Script" uid="uid://bsswlv4krep2b" path="res://scripts/floor.gd" id="1_kuqtn"]
+[ext_resource type="Texture2D" uid="uid://dawbpb6fbju1n" path="res://assets/retro_pixel_plains/style_C/PNG/terrain_center.png" id="2_whr1e"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kuqtn"]
+texture = ExtResource("2_whr1e")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7525o"]
+tile_size = Vector2i(8, 8)
+sources/2 = SubResource("TileSetAtlasSource_kuqtn")
+
+[node name="Floor" type="ParallaxBackground"]
+script = ExtResource("1_kuqtn")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+scale = Vector2(4, 4)
+motion_mirroring = Vector2(72, 0)
+
+[node name="TileMap" type="TileMap" parent="ParallaxLayer"]
+texture_filter = 1
+position = Vector2(0, 146)
+tile_set = SubResource("TileSet_7525o")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 12, 2, 0, 13, 2, 0, 14, 2, 0, 15, 2, 0, 16, 2, 0, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 0, 23, 2, 0, 24, 2, 0, 25, 2, 0, 26, 2, 0, 27, 2, 0, 28, 2, 0, 29, 2, 0, 30, 2, 0, 31, 2, 0, 32, 2, 0, 33, 2, 0, 34, 2, 0, 35, 2, 0, 65571, 2, 0, 65570, 2, 0, 65569, 2, 0, 65568, 2, 0, 65567, 2, 0, 65566, 2, 0, 65565, 2, 0, 65564, 2, 0, 65563, 2, 0, 65562, 2, 0, 65561, 2, 0, 65560, 2, 0, 65559, 2, 0, 65558, 2, 0, 65557, 2, 0, 65556, 2, 0, 65555, 2, 0, 65554, 2, 0, 65551, 2, 0, 65550, 2, 0, 65549, 2, 0, 65548, 2, 0, 65553, 2, 0, 65552, 2, 0, 65547, 2, 0, 65546, 2, 0, 65545, 2, 0, 65544, 2, 0, 65543, 2, 0, 65542, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65541, 2, 0, 65540, 2, 0, 65539, 2, 0)

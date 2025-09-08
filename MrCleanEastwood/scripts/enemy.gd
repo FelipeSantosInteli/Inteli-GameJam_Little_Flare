@@ -2,15 +2,27 @@ extends Node2D
 
 @onready var Sprite = $AnimatedSprite2D
 @onready var onRange = false
-@onready var GameManager = %GameManager
+
+@export var enemy_health := 3
+
+var selected = false
+var is_hit := false
+
+func hit():
+	enemy_health -=1
+	is_hit = true
+	Sprite.play("dmg")
+	print(enemy_health)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Sprite.play("idle")
+	Sprite.play("walk")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	position.x -= 3
+	if enemy_health == 0:
+		Sprite.play("death")
 
 func _on_atk_zone_body_entered(body: Node2D) -> void:
 	if (body.name == "Player"):
@@ -30,11 +42,23 @@ func _on_animated_sprite_2d_animation_changed() -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if Sprite:
-		if Sprite.animation == "atk":
+		if Sprite.animation == "atk" && !is_hit:
 			if onRange:
 				Sprite.play("atk")
 				print("tomou")
-				GameManager.player_hit()
+				get_parent().get_node("GameManager").player_hit()
 			else:
-				Sprite.play("idle")
+				Sprite.play("walk")
 				print("errou")
+		
+		if Sprite.animation == "dmg":
+			is_hit = false
+			Sprite.play("walk")
+		
+		if Sprite.animation == "death":
+			queue_free()
+
+func _on_hit_zone_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("click"):
+		print("Click")
+		hit()

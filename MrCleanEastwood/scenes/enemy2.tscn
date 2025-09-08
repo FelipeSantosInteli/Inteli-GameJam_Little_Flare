@@ -1,10 +1,7 @@
-[gd_scene load_steps=62 format=3 uid="uid://wrnoiw30itbh"]
+[gd_scene load_steps=63 format=3 uid="uid://wrnoiw30itbh"]
 
+[ext_resource type="Script" uid="uid://swy218yxpydc" path="res://scripts/enemy_2.gd" id="1_mhmjl"]
 [ext_resource type="Texture2D" uid="uid://76i73f552h8a" path="res://assets/Dark Fantasy Monster Pack 3 - free /pack 3 monster 1.png" id="1_wc7mj"]
-
-[sub_resource type="GDScript" id="GDScript_wc7mj"]
-script/source = "extends \"res://scripts/enemy.gd\"
-"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc7mj"]
 atlas = ExtResource("1_wc7mj")
@@ -326,7 +323,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m28wo")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -340,7 +337,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f1gjb")
 }],
-"loop": true,
+"loop": false,
 "name": &"dmg",
 "speed": 5.0
 }, {
@@ -441,16 +438,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wc7mj"]
 size = Vector2(35, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23kvp"]
+size = Vector2(8, 15)
+
 [node name="Enemy2" type="Node2D"]
-script = SubResource("GDScript_wc7mj")
+scale = Vector2(4, 4)
+script = ExtResource("1_mhmjl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(8.75, 12.5)
 sprite_frames = SubResource("SpriteFrames_xlv4v")
-animation = &"atk"
+animation = &"dmg"
 autoplay = "idle"
-frame = 13
-frame_progress = 1.0
+offset = Vector2(-8.75, -12.5)
 flip_h = true
 
 [node name="AtkZone" type="Area2D" parent="."]
@@ -459,7 +460,14 @@ flip_h = true
 position = Vector2(-13.5, 7)
 shape = SubResource("RectangleShape2D_wc7mj")
 
+[node name="HitZone" type="Area2D" parent="."]
+
+[node name="Col_hit" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_23kvp")
+
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AtkZone" to="." method="_on_atk_zone_body_entered"]
 [connection signal="body_exited" from="AtkZone" to="." method="_on_atk_zone_body_exited"]
+[connection signal="input_event" from="HitZone" to="." method="_on_hit_zone_input_event"]

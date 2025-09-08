@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 func resume():
 	get_tree().paused = false
@@ -22,3 +22,13 @@ func _on_continuar_pressed():
 
 func _process(delta):
 	testEsc()
+
+
+func _on_sair_para_o_menu_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_reiniciar_pressed() -> void:
+	resume()
+	get_tree().reload_current_scene()
+	

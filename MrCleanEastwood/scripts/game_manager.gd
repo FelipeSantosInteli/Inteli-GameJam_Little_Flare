@@ -1,6 +1,6 @@
 extends Node
 
-var player_health = 4
+var player_health = GlobalScript.player_health
 
 @onready var UI = %Ui
 @onready var PlayerNode = %Player

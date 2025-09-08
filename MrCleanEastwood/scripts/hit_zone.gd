@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var Delay = $Delay
 
-@export var DelayTime := 0.0
+@export var DelayTime := 0.1
 
 var hit : bool
 
@@ -36,3 +36,8 @@ func _on_delay_timeout() -> void:
 		print("Hit Timeout")
 		collision()
 		
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		var node_pai = get_parent()
+		print("testando cena: ", node_pai)
+		node_pai.hit()

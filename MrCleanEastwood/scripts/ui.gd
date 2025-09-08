@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@export var player_hearts : int
-@onready var health_points : int
+@export var player_hearts := GlobalScript.player_health
+@onready var health_points := GlobalScript.player_health
 
 @onready var hearts = preload("res://scenes/heart.tscn")
 @onready var heart_container = $Container/Health/HBoxContainer
@@ -12,11 +12,13 @@ func update(health_points: int):
 	print(str("PH: ", player_hearts))
 	if health_points > player_hearts:
 		health_points = player_hearts
-	if health_points >= 0:
+	if health_points > 0:
 		if health_points < player_hearts:
 			var difference = int(player_hearts - health_points)
 			active_hrts[difference * -1].active = false
 			print(difference * -1)
+	if health_points == 0:
+		get_tree().reload_current_scene()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

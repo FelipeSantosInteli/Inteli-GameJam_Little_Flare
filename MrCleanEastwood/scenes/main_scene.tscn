@@ -1,33 +1,75 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfi4oh46xn7ns"]
+[gd_scene load_steps=15 format=3 uid="uid://cfi4oh46xn7ns"]
 
-[ext_resource type="Texture2D" uid="uid://cwp272rw1pv7g" path="res://assets/sky.png" id="1_pu3yx"]
-[ext_resource type="PackedScene" uid="uid://pboaafweyi4a" path="res://scenes/player_test.tscn" id="2_gubc5"]
+[ext_resource type="PackedScene" uid="uid://cppb6kcqd2w7p" path="res://scenes/parallax_background.tscn" id="1_6wevv"]
+[ext_resource type="Script" uid="uid://bblbt711c4hp6" path="res://scripts/main_scene.gd" id="1_e1cbu"]
 [ext_resource type="Script" uid="uid://b88vel5vk13sr" path="res://scripts/cloud_spawner.gd" id="3_rt2n2"]
 [ext_resource type="PackedScene" uid="uid://bhax5cocobq3t" path="res://scenes/pause_menu.tscn" id="4_c16ls"]
+[ext_resource type="PackedScene" uid="uid://b42hi0kki2b44" path="res://scenes/player.tscn" id="5_e1cbu"]
+[ext_resource type="PackedScene" uid="uid://dkiyb7whqm77m" path="res://scenes/floor.tscn" id="5_gubc5"]
+[ext_resource type="Script" uid="uid://dm2ydsvm7gltr" path="res://scripts/game_manager.gd" id="6_mngbo"]
+[ext_resource type="PackedScene" uid="uid://c6nv0m85vf1bv" path="res://scenes/UI.tscn" id="7_4w45t"]
+[ext_resource type="PackedScene" uid="uid://cak4yud372edf" path="res://scenes/enemy.tscn" id="8_r6p65"]
+[ext_resource type="PackedScene" uid="uid://wrnoiw30itbh" path="res://scenes/enemy2.tscn" id="9_si52b"]
+[ext_resource type="PackedScene" uid="uid://cikfksbyr4008" path="res://scenes/Enemy3.tscn" id="10_01n6w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rt2n2"]
+size = Vector2(1152, 65)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c16ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1cbu"]
+size = Vector2(20, 675)
 
 [node name="Main Scene" type="Node2D"]
+script = ExtResource("1_e1cbu")
+my_scenes = Array[PackedScene]([ExtResource("8_r6p65"), ExtResource("9_si52b"), ExtResource("10_01n6w")])
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_6wevv")]
 
-[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Floor" parent="." instance=ExtResource("5_gubc5")]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
-texture_filter = 1
-scale = Vector2(2.1573, 2.18)
-texture = ExtResource("1_pu3yx")
-centered = false
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+position = Vector2(3, 584)
 
-[node name="PlayerTest" parent="." instance=ExtResource("2_gubc5")]
-position = Vector2(1, 70)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(573, 58)
+shape = SubResource("RectangleShape2D_rt2n2")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerTest"]
-position = Vector2(-2, -66)
-offset = Vector2(576, 324)
+[node name="Sprite2D" type="Sprite2D" parent="Floor/StaticBody2D"]
+visible = false
+scale = Vector2(1150.25, 63.5)
+texture = SubResource("PlaceholderTexture2D_c16ls")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(-13, -247.5)
+shape = SubResource("RectangleShape2D_e1cbu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(1159, -247)
+shape = SubResource("RectangleShape2D_e1cbu")
 
 [node name="CloudSpawner" type="Node2D" parent="."]
 script = ExtResource("3_rt2n2")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_c16ls")]
+[node name="PauseMenu" parent="." instance=ExtResource("4_c16ls")]
 visible = false
+
+[node name="Player" parent="." instance=ExtResource("5_e1cbu")]
+unique_name_in_owner = true
+position = Vector2(150, 256)
+
+[node name="Ui" parent="." instance=ExtResource("7_4w45t")]
+unique_name_in_owner = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1247, 583)
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_mngbo")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
